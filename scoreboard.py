@@ -45,14 +45,15 @@ def main():
 
   # get the winner
   winner_count = max(scores.values())
+  # make sure we don't divide by zero
+  if winner_count != 0:
+    for player in scores:
+      # scores are percentage of highest score, based on rounding down on 25%
+      display_scores[player] = int(math.floor(float(scores[player]) / float(winner_count) * 100.00 / 25.00))
 
-  for player in scores:
-    # scores are percentage of highest score, based on rounding down on 25%
-    display_scores[player] = int(math.floor(float(scores[player]) / float(winner_count) * 100.00 / 25.00))
-
-  # draw_scores(display_scores)
-  visualize_scores(dict(display_scores))
-  light_scores(dict(display_scores))
+    # draw_scores(display_scores)
+    visualize_scores(dict(display_scores))
+    light_scores(dict(display_scores))
 
 # no timezone offset...
 def parse_tz(date):
