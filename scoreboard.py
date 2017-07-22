@@ -11,8 +11,8 @@ from datetime import datetime, timedelta
 def main():
   api_base = 'https://yourteam.beanstalkapp.com/api/changesets.json'
   username = ''
-  key = ''  
-# 30 max so do page
+  key = ''
+  # 30 max so do page
   params = {'per_page': '30', 'page': 1}
 
   scores = {}
@@ -41,9 +41,9 @@ def main():
       else:
         do_request = False
         break
-      # do_request = False
     params['page'] += 1
 
+  # get the winner
   winner_count = max(scores.values())
 
   for player in scores:
@@ -69,12 +69,15 @@ def parse_tz(date):
   return stamp
 
 def in_last_day(date):
+  # check if this was in the last day
   return (datetime.now() - date).days < 1
 
+# use unicorn phat to show the graph
 def light_scores(s):
   uh.set_layout(uh.PHAT)
-  uh.brightness(0.5)
-  pos = 0
+  uh.brightness(0.5) # this is still pretty bright
+  pos = 0 # x position, 8(x) by 4(y)
+  # iterate over players and start marking scores
   for score in s:
     for i in range(4):
       if s[score] > 0:
@@ -85,6 +88,7 @@ def light_scores(s):
   uh.show()
   time.sleep(60)
 
+# Terminal visualization matrix
 def visualize_scores(s):
   a = []
   b = []
